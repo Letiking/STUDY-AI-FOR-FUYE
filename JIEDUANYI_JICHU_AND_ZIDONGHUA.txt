@@ -1,0 +1,109 @@
+﻿#W1.1 变量、数据类型、print / input、格式化输出 运算符 加减乘除取余取模 字符串拼接  String（字符串）List（列表）Tuple（元组）Set（集合）Dictionary（字典） 运算符
+
+a=10
+
+b=3.14
+
+c="Hello, World!"
+
+print(a)
+
+print(b)
+
+print(c)
+
+#数据类型 String（字符串）List（列表）Tuple（元组）Set（集合）Dictionary（字典）
+
+aa=type(a)
+
+bb=type(b)
+
+cc=type(c)
+
+print(str(aa)+" "+str(bb)+" "+str(cc))
+
+a1="Hello"
+
+a2=[1,2,3]
+
+a3=(4,5,6)
+
+a4={7,8,9}
+
+a5={"name": "Alice", "age": 30}
+
+print(str(type(a1))+" "+str(type(a2))+" "+str(type(a3))+" "+str(type(a4))+" "+str(type(a5))) 
+
+d=input("请输入一个数字：")
+
+print(d)
+
+d1=int(d)
+
+print(d1)
+
+print("a=%d,b=%.2f,c=%s" % (a,b,c))
+
+print("a={},b={:.2f},c={}".format(a,b,c)) #最简洁
+
+print(f"a={a},b={b:.2f},c={c}")
+
+e=10
+
+f=3
+
+g=e+f
+
+h=e-f
+
+i=e*f
+
+j=e/f
+
+k=e%f
+
+print("g={},h={},i={},j={},k={}".format(g,h,i,j,k)+"字符串拼接："+"Hello"+" "+"World!")
+
+#运算符 都有哪些？
+
+# +, -, *, /, %, **, //
+
+# ==, !=, >, <, >=, <=
+
+# and, or, not
+
+# =, +=, -=, *=, /=, %=, **=, //=
+
+# in,not in
+
+# is, is not
+
+# 三元运算符
+
+x=5
+
+y=1
+
+z=x if x>y else y
+
+print(z)
+
+# z = (x > y) ? x : y;  # This is not valid Python syntax
+
+# 列表生成
+
+list1=[i for i in range(10)]
+
+print(list1)
+
+# 列表生成如果偶数保留，否则改为66
+
+list2=[i if i%2==0 else 66 for i in range(10)]
+
+print(list2)
+
+# 列表生成如果偶数保留，否则舍弃，且只保留前3个
+
+list3=[i for i in range(10) if i%2==0][:3]
+
+print(list3)
