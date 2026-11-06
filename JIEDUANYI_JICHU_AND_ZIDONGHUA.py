@@ -280,3 +280,57 @@ def read_json_from_file(filename):
 write_json_to_file('data.json', {'name': 'Alice', 'age': 30})
 json_content = read_json_from_file('data.json')
 print(json_content)
+
+
+
+# HTTP/API 概念、requests、API Key	调一个免费 API（如天气），打印返回 JSON	能拿到 JSON 数据
+# API Key 是一个用于验证身份的密钥，通常用于访问需要身份验证的 API。它可以帮助 API 提供者识别和授权用户，确保只有合法用户才能访问其服务。API Key 通常是一个字符串，由字母、数字和特殊字符组成，用户在请求 API 时需要将其包含在请求头或请求参数中。
+# requests.post 是 Python 中 requests 库的一个方法，用于向指定的 URL 发送 POST 请求。POST 请求通常用于向服务器提交数据，例如表单数据或 JSON 数据。使用 requests.post 方法时，可以传递 URL、请求头、请求体等参数，以便与服务器进行交互。
+import requests
+url = "https://uapis.cn/api/v1/translate/text"
+# API Key 放在请求头中（标准做法）
+headers = {"Authorization": "uapi-7jizkuwt6nIQnICSO3isqURwI2HVHkC3E4KydsIY"}
+# to_lang 作为查询参数
+params = {"to_lang": "zh"}
+# text 作为 JSON 请求体
+payload = {"text": "decorator"}
+response = requests.post(url, headers=headers, params=params, json=payload)
+print(response.json())
+
+import requests
+url = "https://uapis.cn/api/v1/misc/weather"
+# API Key 放在请求头中（标准做法）
+headers = {"Authorization": "uapi-7jizkuwt6nIQnICSO3isqURwI2HVHkC3E4KydsIY"}
+# to_lang 作为查询参数
+params = {"city": "长春"}
+
+response = requests.get(url, headers=headers, params=params)
+print(response.json())
+
+# 大模型 API 文档、鉴权、基础参数	注册 DeepSeek / 通义，发第一条对话	返回正常文本
+# 大模型 API 文档通常提供了如何使用 API 的详细说明，包括请求方法、请求参数、返回格式等。鉴权是指验证用户身份的过程，通常通过 API Key 或 OAuth 等方式进行。基础参数是指在调用 API 时必须提供的参数，例如模型名称、输入文本等。
+# base_url (OpenAI)	https://api.deepseek.com
+# base_url (Anthropic)	https://api.deepseek.com/anthropic
+# api_key	申请一个 API key
+# model	deepseek-flash(1)
+# deepseek-v4-pro
+
+# Please install OpenAI SDK first: `pip3 install openai`
+import os
+from openai import OpenAI
+client = OpenAI(
+     api_key='sk-3a7a7c5cc04a4dffbfbdd47c94c1cf89',
+    base_url="https://api.deepseek.com",
+     timeout=60.0)
+response = client.chat.completions.create(
+    model="deepseek-flash",
+    messages=[
+        {"role": "system", "content": "你是一个乐于助人的助手"},
+        {
+            "role": "user",
+            "content": "今天长春绿园区天气如何？请用简洁的语言告诉我天气、温度和风力情况。",
+        },
+    ],
+    stream=False,
+)
+print(response.choices[0].message.content)
